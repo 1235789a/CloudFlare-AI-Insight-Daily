@@ -109,6 +109,10 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
+
+          # 防崩装甲：强行垫底两个空文件夹
+          mkdir -p today daily
+          touch today/.gitkeep daily/.gitkeep
           
           git add today/ daily/
           if [ -f "rss.xml" ]; then
@@ -118,9 +122,9 @@ jobs:
           fi
 
           if git diff --staged --quiet; then
-            echo "没有文件变更，无需提交。"
+            echo "大龙虾今日未榨取到痛点，交白卷，安全退出。"
           else
-            echo "检测到文件变更，正在提交..."
-            git commit -m "docs: 自动构建日刊并归档旧月份 (`date -u`)"
+            echo "发现高价值痛点，正在推送到仓库..."
+            git commit -m "docs: 自动构建大龙虾商业简报 (`date -u`)"
             git push
           fi
